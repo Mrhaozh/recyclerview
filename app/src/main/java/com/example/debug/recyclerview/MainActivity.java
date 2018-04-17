@@ -39,31 +39,31 @@ public class MainActivity extends AppCompatActivity {
         listBean1.setnickName("nickName1");
         listData.add(listBean1);
         ListBean listBean2=new ListBean();
-        for(int i=0;i<1;i++){
+        for(int i=0;i<2;i++){
             listBean2.getList().add(mUrls[i]);
         }
         listBean2.setnickName("nickName2");
         listData.add(listBean2);
         ListBean listBean3=new ListBean();
-        for(int i=0;i<2;i++){
+        for(int i=0;i<3;i++){
             listBean3.getList().add(mUrls[i]);
         }
         listBean3.setnickName("nickName3");
         listData.add(listBean3);
         ListBean listBean4=new ListBean();
-        for(int i=0;i<3;i++){
+        for(int i=0;i<4;i++){
             listBean4.getList().add(mUrls[i]);
         }
         listBean4.setnickName("nickName4");
         listData.add(listBean4);
         ListBean listBean5=new ListBean();
-        for(int i=0;i<4;i++){
+        for(int i=0;i<5;i++){
             listBean5.getList().add(mUrls[i]);
         }
         listBean5.setnickName("nickName5");
         listData.add(listBean5);
         ListBean listBean6=new ListBean();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<6;i++){
             listBean6.getList().add(mUrls[i]);
         }
         listBean6.setnickName("nickName6");

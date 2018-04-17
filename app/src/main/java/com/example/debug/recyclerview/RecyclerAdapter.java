@@ -1,6 +1,7 @@
 package com.example.debug.recyclerview;
 
 import android.content.Context;
+import android.opengl.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,7 +29,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-        Glide.with(context).load(urlList.get(position)).into(holder.imageView);
+
+        if(urlList.size()>1){
+            holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Glide.with(context).load(urlList.get(position)).override(300, 300).into(holder.imageView);
+        }else{
+            Glide.with(context).load(urlList.get(position)).override(300, 300).into(holder.imageView);
+        }
     }
 
     @Override
