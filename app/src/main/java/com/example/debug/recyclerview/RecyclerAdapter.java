@@ -1,13 +1,16 @@
 package com.example.debug.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.opengl.Matrix;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -28,8 +31,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull RecycleViewHolder holder, final int position) {
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(context,ImageShower.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("url",urlList.get(position).toString());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+                // Toast.makeText(v.getContext(),"url"+urlList.get(position).toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
         if(urlList.size()==1){
             holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(context).load(urlList.get(position)).override(600, 600).into(holder.imageView);

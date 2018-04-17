@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(listAdapter);
     }
     public void setData(){
+        ListBean listBean0=new ListBean();
+        listBean0.setnickName("nickName0");
+        listData.add(listBean0);
         ListBean listBean1=new ListBean();
         listBean1.getList().add(mUrls[0]);
         listBean1.setnickName("nickName1");
