@@ -53,8 +53,10 @@ public class ListAdapter extends BaseAdapter{
         viewHolder.recyclerView.setAdapter(recyclerAdapter);
         if(listData.get(position).getList().size()==4){
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,2, OrientationHelper.VERTICAL,false));
-        }else {
-            viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 3, OrientationHelper.VERTICAL, false));
+        }else if(listData.get(position).getList().size()==1){
+            viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 1, OrientationHelper.VERTICAL, false));
+        }else{
+            viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,3,OrientationHelper.VERTICAL,false));
         }
         return convertView;
     }

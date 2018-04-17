@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
     private List<ListBean> listData =new ArrayList<>();
     private ListView listView;
     private ListAdapter listAdapter;
-    private String[] mUrls = new String[]{"http://d.hiphotos.baidu.com/image/h%3D200/sign=201258cbcd80653864eaa313a7dca115/ca1349540923dd54e54f7aedd609b3de9c824873.jpg",
+    private String[] mUrls = new String[]{
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523940434538&di=4f4fe0e88d3daf3638c34fc2ea34fbbc&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D3649436761%2C627241649%26fm%3D214%26gp%3D0.jpg",
             "http://d.hiphotos.baidu.com/image/h%3D200/sign=201258cbcd80653864eaa313a7dca115/ca1349540923dd54e54f7aedd609b3de9c824873.jpg",
             "http://d.hiphotos.baidu.com/image/h%3D200/sign=201258cbcd80653864eaa313a7dca115/ca1349540923dd54e54f7aedd609b3de9c824873.jpg",
             "http://d.hiphotos.baidu.com/image/h%3D200/sign=201258cbcd80653864eaa313a7dca115/ca1349540923dd54e54f7aedd609b3de9c824873.jpg",

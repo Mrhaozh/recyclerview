@@ -30,10 +30,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
 
-        if(urlList.size()>1){
-            holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Glide.with(context).load(urlList.get(position)).override(300, 300).into(holder.imageView);
+        if(urlList.size()==1){
+            holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            Glide.with(context).load(urlList.get(position)).override(600, 600).into(holder.imageView);
         }else{
+            holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Glide.with(context).load(urlList.get(position)).override(300, 300).into(holder.imageView);
         }
     }
