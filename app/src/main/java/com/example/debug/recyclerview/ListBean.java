@@ -4,20 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListBean {
-    public ListBean(){}
-    private List<String> urlList =new ArrayList<>();
-
-    private  String nickName;
-    public void setList(List<String> urlList){
-        this.urlList=urlList;
+    public ListBean() {
     }
-    public List<String> getList(){
+
+    private List<String> urlList = new ArrayList<>();
+    private StringBuilder sb =new StringBuilder();
+    private String nickName;
+
+
+    public void setList(List<String> urlList) {
+        this.urlList = urlList;
+    }
+    public List<String> getList() {
         return urlList;
     }
-    public void setnickName(String nickName){
-        this.nickName=nickName;
+    public StringBuilder setsb(){
+       return sb;
     }
-    public String getnickName(){
+    public String getsb(){
+        if(sb.toString().length()>0) {
+            return sb.substring(0, sb.lastIndexOf(",")).toString();
+        }else{
+            return null;
+        }
+        }
+    public void setnickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getnickName() {
         return nickName;
     }
 }

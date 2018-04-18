@@ -9,63 +9,81 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@mipmap/ic_launcher"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/nickName"
-            android:text="jay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="jay" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="翻着我们的照片，想念若隐若现，去年的冬天，我们笑得很甜......
-            --哎哟，不错哦!"/>
+            --哎哟，不错哦!" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:text="10分钟前"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"/>
+                android:gravity="left"
+                android:text="10分钟前" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_gravity="right|center_vertical"
-                android:gravity="right"
                 android:layout_marginRight="5dp"
+                android:gravity="right"
                 android:scaleType="fitEnd"
                 android:src="@drawable/pl" />
         </LinearLayout>
 
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:src="@drawable/triangle"
-          android:paddingLeft="15dp"/>
+        <ImageView
+            android:id="@+id/triicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:src="@drawable/triangle"
+            android:visibility="gone" />
+
         <LinearLayout
+            android:id="@+id/likeLayout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:background="#edefee"
             android:orientation="horizontal"
-            android:visibility="visible">
+            >
+
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/heart"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"/>
+                android:layout_width="16dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/heart" />
+
+            <TextView
+                android:id="@+id/likeTxv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="adhfasdf按时打开附件是卡的房间昆仑山地方就卡死的阿斯蒂芬阿斯蒂芬" />
         </LinearLayout>
 
 
