@@ -70,11 +70,14 @@ public class ListAdapter extends BaseAdapter{
         }else{
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,3,OrientationHelper.VERTICAL,false));
         }
-        if(listData.get(position).getsb()!=null){
+        if(listData.get(position).getsb().length()>1){
             viewHolder.triicon.setVisibility(View.VISIBLE);
             viewHolder.likeLayout.setVisibility(View.VISIBLE);
             viewHolder.likeTxv.setMovementMethod(LinkMovementMethod.getInstance());
             viewHolder.likeTxv.setText(addClickPart(listData.get(position).getsb()),TextView.BufferType.SPANNABLE);
+        }else{
+            viewHolder.triicon.setVisibility(View.GONE);
+            viewHolder.likeLayout.setVisibility(View.GONE);
         }
         return convertView;
     }

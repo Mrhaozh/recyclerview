@@ -6,7 +6,6 @@ import java.util.List;
 public class ListBean {
     public ListBean() {
     }
-
     private List<String> urlList = new ArrayList<>();
     private StringBuilder sb =new StringBuilder();
     private String nickName;

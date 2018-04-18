@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
     public void setData() {
         ListBean listBean0 = new ListBean();
         listBean0.setnickName("nickName0");
-        listBean0.setsb().append("好友" + 1 + ",");
+        listBean0.setsb().append(",");
         listData.add(listBean0);
 
         ListBean listBean1 = new ListBean();
         listBean1.getList().add(mUrls[0]);
         listBean1.setnickName("nickName1");
-        listBean1.setsb().append("好友" + 2 + ",");
+        listBean1.setsb().append(",");
         listData.add(listBean1);
 
         ListBean listBean2 = new ListBean();
