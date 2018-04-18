@@ -3,6 +3,7 @@ package com.example.debug.recyclerview;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setData();
         listView = findViewById(R.id.list_view);
+        ScrollView scrollView=findViewById(R.id.scrollview);
+        scrollView.smoothScrollTo(0,0);
         listAdapter = new ListAdapter(this, listData);
         listView.setAdapter(listAdapter);
     }
