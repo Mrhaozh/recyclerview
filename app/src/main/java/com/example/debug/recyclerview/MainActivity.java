@@ -2,8 +2,11 @@ package com.example.debug.recyclerview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ListBean> listData = new ArrayList<>();
     private ListView listView;
     private ListAdapter listAdapter;
+    private PullToRefreshLayout layout;
     private String[] mUrls = new String[]{
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523940434538&di" +
                     "=4f4fe0e88d3daf3638c34fc2ea34fbbc&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn" +
@@ -47,10 +51,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setData();
         listView = findViewById(R.id.list_view);
-        ScrollView scrollView=findViewById(R.id.scrollview);
-        scrollView.smoothScrollTo(0,0);
+        layout=(PullToRefreshLayout) findViewById(R.id.refresh_layout);
+        //ScrollView scrollView=findViewById(R.id.scrollview);
+        //scrollView.smoothScrollTo(0,50);
         listAdapter = new ListAdapter(this, listData);
         listView.setAdapter(listAdapter);
+        View head= LayoutInflater.from(this).inflate(R.layout.head_view_layout,null);
+        listView.addHeaderView(head);
+        layout.setListener(new PullToRefreshLayout.RefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layout.stopRefresh();
+                        Toast.makeText(MainActivity.this,"刷新完成",Toast.LENGTH_SHORT).show();
+
+                    }
+                },1000);
+            }
+        });
     }
 
     public void setData() {
