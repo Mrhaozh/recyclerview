@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ListAdapter listAdapter;
     private PullToRefreshLayout layout;
+    private ImageView headimg;
     private String[] mUrls = new String[]{
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523940434538&di" +
                     "=4f4fe0e88d3daf3638c34fc2ea34fbbc&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn" +
@@ -69,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 },1000);
+            }
+        });
+        headimg=findViewById(R.id.headimg);
+        headimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"hhhhhhead",Toast.LENGTH_SHORT).show();
             }
         });
     }

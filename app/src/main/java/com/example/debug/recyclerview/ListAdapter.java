@@ -5,13 +5,10 @@ import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,10 +53,12 @@ public class ListAdapter extends BaseAdapter{
             viewHolder.triicon=convertView.findViewById(R.id.triicon);
             viewHolder.likeLayout=convertView.findViewById(R.id.likeLayout);
             viewHolder.recyclerView=convertView.findViewById(R.id.recycler_view);
+            viewHolder.pl=convertView.findViewById(R.id.pl);
             convertView.setTag(viewHolder);
         }else {
             viewHolder=(ViewHolder)convertView.getTag();
         }
+
         viewHolder.txv.setText(listData.get(position).getnickName());
         RecyclerAdapter recyclerAdapter=new RecyclerAdapter(context,listData.get(position).getList());
         viewHolder.recyclerView.setAdapter(recyclerAdapter);
@@ -79,6 +78,12 @@ public class ListAdapter extends BaseAdapter{
             viewHolder.triicon.setVisibility(View.GONE);
             viewHolder.likeLayout.setVisibility(View.GONE);
         }
+        viewHolder.pl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"ppppppl",Toast.LENGTH_SHORT).show();
+            }
+        });
         return convertView;
     }
     private SpannableStringBuilder addClickPart(String str){
@@ -112,6 +117,7 @@ public class ListAdapter extends BaseAdapter{
         TextView txv;
         TextView likeTxv;
         ImageView triicon;
+        ImageView pl;
         LinearLayout likeLayout;
         RecyclerView recyclerView;
     }

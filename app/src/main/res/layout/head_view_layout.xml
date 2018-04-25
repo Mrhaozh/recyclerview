@@ -19,6 +19,7 @@
         android:textColor="#FFF"
         android:layout_marginRight="115dp"/>
     <ImageView
+        android:id="@+id/headimg"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/headimg"

@@ -50,6 +50,7 @@
                 android:text="10分钟前" />
 
             <ImageView
+                android:id="@+id/pl"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_gravity="right|center_vertical"
