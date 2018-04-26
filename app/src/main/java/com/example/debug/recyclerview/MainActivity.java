@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         listAdapter = new ListAdapter(this, listData);
         listView.setAdapter(listAdapter);
         View head= LayoutInflater.from(this).inflate(R.layout.head_view_layout,null);
-        listView.addHeaderView(head);
+        listView.addHeaderView(head,null,true);
+        listView.setHeaderDividersEnabled(false);
         layout.setListener(new PullToRefreshLayout.RefreshListener() {
             @Override
             public void onRefresh() {

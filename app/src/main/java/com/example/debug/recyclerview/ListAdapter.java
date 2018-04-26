@@ -9,12 +9,14 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +83,7 @@ public class ListAdapter extends BaseAdapter{
         viewHolder.pl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"ppppppl",Toast.LENGTH_SHORT).show();
+                showpopwindow(v);
             }
         });
         return convertView;
@@ -112,6 +114,14 @@ public class ListAdapter extends BaseAdapter{
             }
         }
         return ssb.append("等" +likeUsers.length+"个人觉得很赞");
+    }
+    private void showpopwindow(View v){
+        View view =LayoutInflater.from(context).inflate(R.layout.popwindow,null,false);
+        view.measure(0,0);
+        PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),80,true);
+        int[] location =new int[2];
+        v.getLocationInWindow(location);
+        popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0]-popupWindow.getWidth(),location[1]-15);
     }
     private class ViewHolder{
         TextView txv;

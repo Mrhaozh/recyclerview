@@ -2,7 +2,6 @@ package com.example.debug.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
-import android.opengl.Matrix;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>{
@@ -48,7 +43,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(context).load(urlList.get(position)).override(600, 600).into(holder.imageView);
         }else{
-            holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            ViewGroup.LayoutParams params=holder.imageView.getLayoutParams();
+            params.height=240;
+            params.width=240;
+            holder.imageView.setLayoutParams(params);
+            holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(context).load(urlList.get(position)).override(300, 300).into(holder.imageView);
         }
     }
