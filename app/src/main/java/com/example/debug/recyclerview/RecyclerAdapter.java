@@ -40,7 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             }
         });
         if(urlList.size()==1){
-            holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            holder.imageView.setScaleType(ImageView.ScaleType.FIT_START);
             Glide.with(context).load(urlList.get(position)).override(600, 600).into(holder.imageView);
         }else{
 //            ViewGroup.LayoutParams params=holder.imageView.getLayoutParams();
@@ -48,7 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 //            params.width=240;
 //            holder.imageView.setLayoutParams(params);
             holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(context).load(urlList.get(position)).override(200, 200).into(holder.imageView);
+            Glide.with(context).load(urlList.get(position)).override(100, 100).into(holder.imageView);
         }
     }
 
