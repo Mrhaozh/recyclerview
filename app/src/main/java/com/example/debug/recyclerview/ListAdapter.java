@@ -2,6 +2,8 @@ package com.example.debug.recyclerview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -133,8 +135,9 @@ public class ListAdapter extends BaseAdapter{
     private void showpopwindow(View v){
         View view =LayoutInflater.from(context).inflate(R.layout.popwindow,null,false);
         view.measure(0,0);
-        PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),80,true);
+        PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),100,true);
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        //popupWindow.setBackgroundDrawable(new PaintDrawable(R.drawable.corner));
         int[] location =new int[2];
         v.getLocationInWindow(location);
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0]-popupWindow.getWidth(),location[1]-15);

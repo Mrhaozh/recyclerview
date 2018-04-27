@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="20dp"
-    android:background="#535961"
+    android:layout_height="30dp"
+    android:background="@drawable/corner"
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="5dp"
@@ -19,17 +19,17 @@
         android:layout_gravity="center_vertical"
         android:text="赞"
         android:textColor="#FFF"
-        android:textSize="8dp" />
+        android:textSize="14sp" />
     <View
         android:layout_width="2dp"
-        android:layout_height="10dp"
+        android:layout_height="20dp"
         android:background="#444444"
-        android:layout_marginLeft="15dp"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_margin="20dp"
         android:layout_gravity="center_vertical"/>
     <ImageView
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
         android:layout_gravity="center_vertical"
 
         android:src="@drawable/comment" />
@@ -42,5 +42,5 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="20dp"
         android:textColor="#FFF"
-        android:textSize="8dp" />
+        android:textSize="14sp" />
 </LinearLayout>
