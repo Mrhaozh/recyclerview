@@ -43,12 +43,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             holder.imageView.setScaleType(ImageView.ScaleType.FIT_START);
             Glide.with(context).load(urlList.get(position)).override(600, 600).into(holder.imageView);
         }else{
-//            ViewGroup.LayoutParams params=holder.imageView.getLayoutParams();
-//            params.height=240;
-//            params.width=240;
-//            holder.imageView.setLayoutParams(params);
             holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(context).load(urlList.get(position)).override(100, 100).into(holder.imageView);
+            Glide.with(context).load(urlList.get(position)).override(50, 50).into(holder.imageView);
         }
     }
 

@@ -65,10 +65,25 @@ public class ListAdapter extends BaseAdapter{
         RecyclerAdapter recyclerAdapter=new RecyclerAdapter(context,listData.get(position).getList());
         viewHolder.recyclerView.setAdapter(recyclerAdapter);
         if(listData.get(position).getList().size()==4){
+            ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
+//            params.width=160;
+            int getwidth=dp2px(context,180);
+            params.width=getwidth;
+            viewHolder.recyclerView.setLayoutParams(params);
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,2, OrientationHelper.VERTICAL,false));
         }else if(listData.get(position).getList().size()==1){
+            ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
+//            params.width=160;
+            int getwidth=dp2px(context,270);
+            params.width=getwidth;
+            viewHolder.recyclerView.setLayoutParams(params);
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 1, OrientationHelper.VERTICAL, false));
         }else{
+            ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
+//            params.width=160;
+            int getwidth=dp2px(context,270);
+            params.width=getwidth;
+            viewHolder.recyclerView.setLayoutParams(params);
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,3,OrientationHelper.VERTICAL,false));
         }
         if(listData.get(position).getsb().length()>1){
@@ -119,9 +134,14 @@ public class ListAdapter extends BaseAdapter{
         View view =LayoutInflater.from(context).inflate(R.layout.popwindow,null,false);
         view.measure(0,0);
         PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),80,true);
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         int[] location =new int[2];
         v.getLocationInWindow(location);
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0]-popupWindow.getWidth(),location[1]-15);
+    }
+    public static int dp2px(Context context, float dpValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
     private class ViewHolder{
         TextView txv;

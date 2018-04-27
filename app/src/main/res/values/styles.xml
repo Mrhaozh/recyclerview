@@ -43,4 +43,8 @@
         <item name="android:windowEnterAnimation">@anim/head_in</item>
         <item name="android:windowExitAnimation">@anim/head_out</item>
     </style>
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/inrighttoleft</item>
+        <item name="android:windowExitAnimation">@anim/outlefttoright</item>
+    </style>
 </resources>
