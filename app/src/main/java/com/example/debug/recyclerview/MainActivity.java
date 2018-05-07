@@ -139,4 +139,5 @@ public class MainActivity extends AppCompatActivity {
         listBean6.setnickName("nickName6");
         listData.add(listBean6);
     }
+
 }

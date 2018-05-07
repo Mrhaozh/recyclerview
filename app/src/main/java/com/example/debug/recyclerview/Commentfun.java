@@ -30,7 +30,7 @@ public class Commentfun {
             @Override
             public void onShow(int[] inputViewCoordinatesOnScreen) {
                 if(listView!=null){
-                    int span=btnComment.getId() ==R.id.pl? 0 :btnComment.getHeight();
+                    int span=btnComment.getId() ==R.id.pl?btnComment.getHeight() :btnComment.getHeight();
                     listView.smoothScrollBy(coord[1]+span-inputViewCoordinatesOnScreen[1],1000);
                 }
             }
@@ -42,7 +42,7 @@ public class Commentfun {
         });
     }
     private static Dialog showInputComment(Context context,final CommentDialogListener listener){
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(context,android.R.style.Theme_Translucent_NoTitleBar);
         dialog.setContentView(R.layout.view_input_comment);
         dialog.findViewById(R.id.input_comment_dialog_container).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +64,7 @@ public class Commentfun {
             }
         });
         dialog.setCancelable(true);
+       // dialog.setTitle("hello");
         dialog.show();
         new android.os.Handler().postDelayed(new Runnable() {
             @Override

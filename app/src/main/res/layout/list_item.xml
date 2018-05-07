@@ -60,7 +60,8 @@
                 android:layout_gravity="right|center_vertical"
                 android:gravity="right"
                 android:scaleType="fitEnd"
-                android:src="@drawable/pl" />
+                android:src="@drawable/pl"
+                />
         </LinearLayout>
 
         <ImageView

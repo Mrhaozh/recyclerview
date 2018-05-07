@@ -16,10 +16,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.debug.recyclerview.Commentfun;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.ListBean;
 
@@ -28,6 +30,7 @@ import java.util.List;
 public class ListAdapter extends BaseAdapter{
     private Context context;
     private List<ListBean> listData;
+    private ListView listView;
     public ListAdapter(Context context, List<ListBean> listData){
         this.context=context;
         this.listData=listData;
@@ -49,6 +52,7 @@ public class ListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        listView =(ListView)parent;
         ViewHolder viewHolder;
         if(convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
@@ -134,19 +138,34 @@ public class ListAdapter extends BaseAdapter{
         return ssb.append("等" +likeUsers.length+"个人觉得很赞");
     }
     private void showpopwindow(View v){
+        final ImageView plbutton=v.findViewById(R.id.pl);
         View view =LayoutInflater.from(context).inflate(R.layout.popwindow,null,false);
         view.measure(0,0);
-        PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),100,true);
+        final PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),100,true);
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         //popupWindow.setBackgroundDrawable(new PaintDrawable(R.drawable.corner));
         int[] location =new int[2];
         v.getLocationInWindow(location);
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0]-popupWindow.getWidth(),location[1]-15);
         LinearLayout zan = view.findViewById(R.id.zan);
+        LinearLayout pinglun=view.findViewById(R.id.pinglun);
         zan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                popupWindow.dismiss();
                 Toast.makeText(context,"aaa", Toast.LENGTH_SHORT).show();
+            }
+        });
+        pinglun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                Commentfun.inputComment(context,listView,plbutton,new Commentfun.InputCommentListener(){
+                    @Override
+                    public void onCommitComment() {
+                        ListAdapter.this.notifyDataSetChanged();
+                    }
+                });
             }
         });
     }
