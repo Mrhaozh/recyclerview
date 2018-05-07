@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

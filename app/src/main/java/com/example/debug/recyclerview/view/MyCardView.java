@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.example.debug.recyclerview.R;
 
 public class PullToRefreshLayout extends FrameLayout {
     private ImageView loadingView;//加载view

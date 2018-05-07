@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.view;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.debug.recyclerview.R;
 
 public class ImageShower extends Activity{
     private ImageView imageView;

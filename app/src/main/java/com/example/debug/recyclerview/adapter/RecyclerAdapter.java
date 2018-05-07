@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.example.debug.recyclerview.view.ImageShower;
+import com.example.debug.recyclerview.R;
+
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>{

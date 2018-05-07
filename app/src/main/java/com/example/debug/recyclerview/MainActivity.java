@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.example.debug.recyclerview.adapter.ListAdapter;
+import com.example.debug.recyclerview.bean.ListBean;
+import com.example.debug.recyclerview.view.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;

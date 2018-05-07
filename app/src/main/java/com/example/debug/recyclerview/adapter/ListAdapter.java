@@ -1,9 +1,7 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.debug.recyclerview.R;
+import com.example.debug.recyclerview.bean.ListBean;
 
 import java.util.List;
 
