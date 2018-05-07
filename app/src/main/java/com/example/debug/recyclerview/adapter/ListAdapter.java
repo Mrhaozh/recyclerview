@@ -142,6 +142,13 @@ public class ListAdapter extends BaseAdapter{
         int[] location =new int[2];
         v.getLocationInWindow(location);
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0]-popupWindow.getWidth(),location[1]-15);
+        LinearLayout zan = view.findViewById(R.id.zan);
+        zan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"aaa", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     public static int dp2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
