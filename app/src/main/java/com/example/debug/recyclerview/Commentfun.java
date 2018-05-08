@@ -2,6 +2,7 @@ package com.example.debug.recyclerview;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,8 +31,11 @@ public class Commentfun {
             @Override
             public void onShow(int[] inputViewCoordinatesOnScreen) {
                 if(listView!=null){
-                    int span=btnComment.getId() ==R.id.pl?btnComment.getHeight() :btnComment.getHeight();
-                    listView.smoothScrollBy(coord[1]+span-inputViewCoordinatesOnScreen[1],1000);
+                    //int span=btnComment.getId() ==R.id.pl?0 :btnComment.getHeight();
+                    int span =btnComment.getHeight();
+                    Log.e("tag","span"+span);
+                    listView.smoothScrollBy(coord[1]+span-inputViewCoordinatesOnScreen[1],500);
+
                 }
             }
 
@@ -70,12 +74,12 @@ public class Commentfun {
             @Override
             public void run() {
                 if(listener !=null){
-                    int[] coord =new int[2];
-                    dialog.findViewById(R.id.input_comment_container).getLocationOnScreen(coord);
-                    listener.onShow(coord);
+                    final int[] coords =new int[2];
+                    dialog.findViewById(R.id.input_comment_container).getLocationOnScreen(coords);
+                    listener.onShow(coords);
                 }
             }
-        },300);
+        },400);
         return dialog;
     }
     public interface CommentDialogListener{

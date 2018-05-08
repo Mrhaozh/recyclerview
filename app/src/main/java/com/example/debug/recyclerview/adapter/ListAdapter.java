@@ -102,7 +102,7 @@ public class ListAdapter extends BaseAdapter{
             viewHolder.triicon.setVisibility(View.GONE);
             viewHolder.likeLayout.setVisibility(View.GONE);
         }
-        viewHolder.pl.setOnClickListener(new View.OnClickListener() {
+       viewHolder.pl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showpopwindow(v);
