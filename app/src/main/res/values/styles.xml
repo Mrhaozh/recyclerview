@@ -48,4 +48,7 @@
         <item name="android:windowEnterAnimation">@anim/inrighttoleft</item>
         <item name="android:windowExitAnimation">@anim/outlefttoright</item>
     </style>
+    <style name="Comment" parent="android:TextAppearance">
+        <item name="android:textSize">14dp</item>
+    </style>
 </resources>

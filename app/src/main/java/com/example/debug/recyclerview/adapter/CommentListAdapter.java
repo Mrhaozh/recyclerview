@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.debug.recyclerview.CustomTagHander;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.Comment;
 
@@ -40,18 +41,19 @@ public class CommentListAdapter extends BaseAdapter{
         if(convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.comment_item,parent,false);
             viewHolder=new ViewHolder();
-            viewHolder.uname=convertView.findViewById(R.id.uname);
             viewHolder.content=convertView.findViewById(R.id.content);
             convertView.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder)convertView.getTag();
         }
-            viewHolder.uname.setText(CommentList.get(position).getUserName());
-            viewHolder.content.setText(CommentList.get(position).getContent());
+            if(CommentList.get(position).getReceiver()==null){
+                viewHolder.content= String.format("<html><%s>%s</%s>: <%s>%s</%s></html>", CustomTagHander.TAG_COMMENTATOR,
+                        CommentList.get(position).getReceiver(), CustomTagHander.TAG_COMMENTATOR,
+                        CustomTagHander.TAG_CONTENT, CommentList.get(position).getContent(), CustomTagHander.TAG_CONTENT);
+            }
         return convertView;
     }
     private class ViewHolder {
-        TextView uname;
         TextView content;
     }
 }

@@ -97,7 +97,12 @@
         <com.example.debug.recyclerview.view.ListViewForScrollView
             android:id="@+id/commentlist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.example.debug.recyclerview.view.ListViewForScrollView>
+            android:layout_height="match_parent"
+            android:background="#edefee"
+            android:divider="@null"
+            >
+
+        </com.example.debug.recyclerview.view.ListViewForScrollView>
 
     </LinearLayout>
 </LinearLayout>
