@@ -9,8 +9,14 @@ public class ListBean {
     private List<String> urlList = new ArrayList<>();
     private StringBuilder sb =new StringBuilder();
     private String nickName;
+    private List<Comment> CommentList =new ArrayList<Comment>();
 
-
+    public List<Comment> getCommentList(){
+        return CommentList;
+    }
+    public void setCommentList(List<Comment> CommentList){
+        this.CommentList=CommentList;
+    }
     public void setList(List<String> urlList) {
         this.urlList = urlList;
     }

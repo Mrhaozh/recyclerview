@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.debug.recyclerview.Commentfun;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.ListBean;
+import com.example.debug.recyclerview.view.ListViewForScrollView;
 
 import java.util.List;
 
@@ -63,6 +64,7 @@ public class ListAdapter extends BaseAdapter{
             viewHolder.likeLayout=convertView.findViewById(R.id.likeLayout);
             viewHolder.recyclerView=convertView.findViewById(R.id.recycler_view);
             viewHolder.pl=convertView.findViewById(R.id.pl);
+            viewHolder.commentlistview=convertView.findViewById(R.id.commentlist);
             convertView.setTag(viewHolder);
         }else {
             viewHolder=(ViewHolder)convertView.getTag();
@@ -108,6 +110,8 @@ public class ListAdapter extends BaseAdapter{
                 showpopwindow(v);
             }
         });
+        CommentListAdapter commentListAdapter =new CommentListAdapter(context,listData.get(position).getCommentList());
+        viewHolder.commentlistview.setAdapter(commentListAdapter);
         return convertView;
     }
     private SpannableStringBuilder addClickPart(String str){
@@ -180,5 +184,6 @@ public class ListAdapter extends BaseAdapter{
         ImageView pl;
         LinearLayout likeLayout;
         RecyclerView recyclerView;
+        ListViewForScrollView commentlistview;
     }
 }

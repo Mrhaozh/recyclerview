@@ -28,6 +28,8 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <EditText
+            android:maxLength="500"
+            android:singleLine="false"
             android:id="@+id/input_comment"
             android:layout_weight="1"
             android:hint="评论"

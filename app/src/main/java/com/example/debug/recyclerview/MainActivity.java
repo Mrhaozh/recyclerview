@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.debug.recyclerview.adapter.ListAdapter;
+import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.ListBean;
 import com.example.debug.recyclerview.view.PullToRefreshLayout;
 
@@ -95,11 +96,13 @@ public class MainActivity extends AppCompatActivity {
         ListBean listBean1 = new ListBean();
         listBean1.getList().add(mUrls[0]);
         listBean1.setnickName("nickName1");
+        listBean1.getCommentList().add(new Comment("user1",2,"comment1"));
         listBean1.setsb().append(",");
         listData.add(listBean1);
 
         ListBean listBean2 = new ListBean();
         for (int i = 0; i < 2; i++) {
+            listBean2.getCommentList().add(new Comment("user"+i,2+i,"comment"+i));
             listBean2.getList().add(mUrls[i]);
             listBean2.setsb().append("好友" + i + ",");
         }
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListBean listBean3 = new ListBean();
         for (int i = 0; i < 3; i++) {
+            listBean3.getCommentList().add(new Comment("user"+i,2+i,"comment"+i));
             listBean3.getList().add(mUrls[i]);
             listBean3.setsb().append("好友" + i + ",");
         }
@@ -117,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         ListBean listBean4 = new ListBean();
         StringBuilder sb4 = new StringBuilder();
         for (int i = 0; i < 4; i++) {
+            listBean4.getCommentList().add(new Comment("user"+i,2+i,"commentasfkl评论评论评论评论评论评论评论评论评论评论评论评论"+i));
             listBean4.getList().add(mUrls[i]);
             listBean4.setsb().append("好友" + i + ",");
         }
@@ -125,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListBean listBean5 = new ListBean();
         for (int i = 0; i < 5; i++) {
+            listBean5.getCommentList().add(new Comment("user"+i,2+i,"comment"+i));
             listBean5.getList().add(mUrls[i]);
             listBean5.setsb().append("好友" + i + ",");
         }
@@ -133,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListBean listBean6 = new ListBean();
         for (int i = 0; i < 6; i++) {
+            listBean6.getCommentList().add(new Comment("user"+i,2+i,"comment"+i));
             listBean6.getList().add(mUrls[i]);
             listBean6.setsb().append("好友" + i + ",");
         }
