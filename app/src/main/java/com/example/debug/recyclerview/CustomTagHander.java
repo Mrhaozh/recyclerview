@@ -39,6 +39,14 @@ public class CustomTagHander implements Html.TagHandler{
                     listener.onCommentatorClick(widget,comment);
                 }
             }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(0xFF436B9C);
+                ds.setUnderlineText(false);
+
+            }
         };
         mReceiverSpan=new BaseClickableSpan() {
             @Override
@@ -51,24 +59,27 @@ public class CustomTagHander implements Html.TagHandler{
 
             @Override
             public void updateDrawState(TextPaint ds) {
-                ds.setColor(0xFF436B9C);
                 super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+                ds.setColor(0xFF436B9C);
+
             }
         };
         mContentSpan=new BaseClickableSpan() {
             @Override
             public void onClick(View widget) {
                 if(listener!=null){
-                    Comment comment =(Comment)widget.getTag(KEY_COMMENTATOR);
-                    Comment receiver=(Comment)widget.getTag(KEY_RECEIVER);
+                    String comment =(String)widget.getTag(KEY_COMMENTATOR);
+                    String receiver=(String)widget.getTag(KEY_RECEIVER);
                     listener.onContentClick(widget,comment,receiver);
                 }
             }
 
             @Override
             public void updateDrawState(TextPaint ds) {
-                ds.setColor(0xff000000);
                 super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+                ds.setColor(0xff000000);
             }
         };
 
@@ -122,6 +133,7 @@ public class CustomTagHander implements Html.TagHandler{
         @Override
         public void updateDrawState(TextPaint ds) {
             ds.setColor(ds.linkColor);
+            ds.setUnderlineText(false);
             super.updateDrawState(ds);
         }
     }
