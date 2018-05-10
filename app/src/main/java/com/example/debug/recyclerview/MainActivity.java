@@ -11,7 +11,12 @@ import android.widget.Toast;
 import com.example.debug.recyclerview.adapter.ListAdapter;
 import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.ListBean;
+import com.example.debug.recyclerview.bean.MessageEvent;
 import com.example.debug.recyclerview.view.PullToRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +55,26 @@ public class MainActivity extends AppCompatActivity {
                     "/ca1349540923dd54e54f7aedd609b3de9c824873.jpg",
             "http://d.hiphotos.baidu.com/image/h%3D200/sign=201258cbcd80653864eaa313a7dca115" +
                     "/ca1349540923dd54e54f7aedd609b3de9c824873.jpg"};
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onmessageEvent(MessageEvent event){
+        Commentfun.inputComment(this,event.listView,event.v,listData,event.position,new Commentfun.InputCommentListener(){
+            @Override
+            public void onCommitComment() {
+                listAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         layout=(PullToRefreshLayout) findViewById(R.id.refresh_layout);
         //ScrollView scrollView=findViewById(R.id.scrollview);
         //scrollView.smoothScrollTo(0,50);
-        listAdapter = new ListAdapter(this, listData);
+        listAdapter = new ListAdapter(MainActivity.this, listData);
         listView.setAdapter(listAdapter);
         View head= LayoutInflater.from(this).inflate(R.layout.head_view_layout,null);
         listView.addHeaderView(head,null,true);
@@ -86,20 +111,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void setData() {
         ListBean listBean0 = new ListBean();
         listBean0.setnickName("nickName0");
         listBean0.setsb().append(",");
         listData.add(listBean0);
-
         ListBean listBean1 = new ListBean();
         listBean1.getList().add(mUrls[0]);
         listBean1.setnickName("nickName1");
         listBean1.getCommentList().add(new Comment("user1",2,"comment1",""));
         listBean1.setsb().append(",");
         listData.add(listBean1);
-
         ListBean listBean2 = new ListBean();
         for (int i = 0; i < 2; i++) {
             listBean2.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));

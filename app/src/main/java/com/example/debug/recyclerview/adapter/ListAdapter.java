@@ -1,5 +1,6 @@
 package com.example.debug.recyclerview.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
@@ -26,17 +27,23 @@ import android.widget.Toast;
 
 import com.example.debug.recyclerview.CenterAlignImageSpan;
 import com.example.debug.recyclerview.Commentfun;
+import com.example.debug.recyclerview.MainActivity;
 import com.example.debug.recyclerview.R;
+import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.ListBean;
+import com.example.debug.recyclerview.bean.MessageEvent;
 import com.example.debug.recyclerview.view.ListViewForScrollView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter{
     private Context context;
     private List<ListBean> listData;
-    private ListView listView;
-   // private LinearLayout heightTag;
+    //private  Commentfun commentfun=new Commentfun();
+    // private ListView listView;
+    // private LinearLayout heightTag;
     public ListAdapter(Context context, List<ListBean> listData){
         this.context=context;
         this.listData=listData;
@@ -57,8 +64,8 @@ public class ListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        listView =(ListView)parent;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        //listView =(ListView)parent;
         final ViewHolder viewHolder;
         if(convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
@@ -110,14 +117,16 @@ public class ListAdapter extends BaseAdapter{
             viewHolder.triicon.setVisibility(View.GONE);
             viewHolder.likeLayout.setVisibility(View.GONE);
         }
-       viewHolder.pl.setOnClickListener(new View.OnClickListener() {
+        viewHolder.pl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showpopwindow(v,viewHolder.heightTag);
+                showpopwindow(v,(ListView)parent,position,viewHolder.heightTag);
             }
         });
-        CommentListAdapter commentListAdapter =new CommentListAdapter(context,listData.get(position).getCommentList(),listView);
-        viewHolder.commentlistview.setAdapter(commentListAdapter);
+
+        //commentfun.setCommentList(context,listData,(ListView)parent,viewHolder.commentlistview,position);
+         CommentListAdapter commentListAdapter =new CommentListAdapter(context,listData.get(position).getCommentList(),(ListView) parent,position);
+         viewHolder.commentlistview.setAdapter(commentListAdapter);
         return convertView;
     }
     private SpannableStringBuilder addClickPart(String str){
@@ -147,7 +156,7 @@ public class ListAdapter extends BaseAdapter{
         }
         return ssb;
     }
-    private void showpopwindow(View v,LinearLayout heightTag){
+    private void showpopwindow(View v, final ListView parent,final int position, LinearLayout heightTag){
         //final ImageView plbutton=v.findViewById(R.id.pl);
         final LinearLayout height=heightTag;
         View view =LayoutInflater.from(context).inflate(R.layout.popwindow,null,false);
@@ -171,12 +180,8 @@ public class ListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                Commentfun.inputComment(context,listView,height,new Commentfun.InputCommentListener(){
-                    @Override
-                    public void onCommitComment() {
-                        ListAdapter.this.notifyDataSetChanged();
-                    }
-                });
+                //Commentfun commentfun=new Commentfun();
+                EventBus.getDefault().post(new MessageEvent(parent,height,position));
             }
         });
     }

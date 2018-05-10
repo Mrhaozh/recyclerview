@@ -9,10 +9,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.debug.recyclerview.adapter.CommentListAdapter;
+import com.example.debug.recyclerview.bean.Comment;
+import com.example.debug.recyclerview.bean.ListBean;
+import com.example.debug.recyclerview.view.ListViewForScrollView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Commentfun {
-    public static void inputComment(final Context context, final ListView listView, final View
-            btnComment, final InputCommentListener listener) {
+        //
+    public static void inputComment(final Context context,final ListView listView, final View
+            btnComment,final List<ListBean> listData,final int position, final InputCommentListener listener) {
         final int[] coord = new int[2];
+
         if (listView != null) {
             btnComment.getLocationOnScreen(coord);
         }
@@ -26,18 +36,23 @@ public class Commentfun {
                 }
                 btn.setClickable(false);
                 dialog.dismiss();
-                Toast.makeText(context, "评论成功", Toast.LENGTH_SHORT).show();
+
+              //  listBean.getCommentList().add(new Comment("评论",312,"hhkkkk","he"));
+                // commentList.add(new Comment("评论",312,"hhkkkk","he"));
+                // commentListAdapter.notifyDataSetChanged();
+                // Log.e("taghhhh",""+commentList);
+                listData.get(position).getCommentList().add(new Comment("评论",312,content,"he"));
+               // Toast.makeText(context, "评论成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onShow(int[] inputViewCoordinatesOnScreen) {
 
                 if (listView != null) {
-                   // int span = btnComment.getId() == R.id.pl ? listView.getLastVisiblePosition().getHeight(): btnComment.getHeight();
+                    // int span = btnComment.getId() == R.id.pl ? listView.getLastVisiblePosition().getHeight(): btnComment.getHeight();
                     int span =btnComment.getHeight();
                     Log.e("tag", "span" + span);
                     listView.smoothScrollBy(coord[1] + span - inputViewCoordinatesOnScreen[1], 500);
-
                 }
             }
 

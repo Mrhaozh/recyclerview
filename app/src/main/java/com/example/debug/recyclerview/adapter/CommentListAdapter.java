@@ -17,6 +17,9 @@ import com.example.debug.recyclerview.Commentfun;
 import com.example.debug.recyclerview.CustomTagHander;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.Comment;
+import com.example.debug.recyclerview.bean.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -25,10 +28,12 @@ public class CommentListAdapter extends BaseAdapter {
     private List<Comment> CommentList;
     private CustomTagHander customTagHander;
     private ListView listView;
-    public CommentListAdapter(Context context, List<Comment> CommentList,ListView listView) {
+    private int getposition;
+    public CommentListAdapter(Context context, List<Comment> CommentList,ListView listView,int getposition) {
         this.context = context;
         this.CommentList = CommentList;
         this.listView=listView;
+        this.getposition=getposition;
     }
 
     @Override
@@ -72,12 +77,7 @@ public class CommentListAdapter extends BaseAdapter {
 
             @Override
             public void onContentClick(View view, String comment, String receiver) {
-               Commentfun.inputComment(context,listView,view,new Commentfun.InputCommentListener(){
-                   @Override
-                   public void onCommitComment() {
-                       CommentListAdapter.this.notifyDataSetChanged();
-                   }
-               });
+                EventBus.getDefault().post(new MessageEvent(listView,view,getposition));
             }
         });
         if (CommentList.get(position).getReceiver() == "") {
@@ -89,14 +89,14 @@ public class CommentListAdapter extends BaseAdapter {
 
         } else {
             contentstr = String.format("<html><%s>%s</%s>回复<%s>%s</%s>:<%s>%s</%s></html>", CustomTagHander
-                    .TAG_COMMENTATOR, CommentList.get(position).getUserName(), CustomTagHander
-                    .TAG_COMMENTATOR, CustomTagHander.TAG_RECEIVER, CommentList.get(position)
-                    .getReceiver(), CustomTagHander.TAG_RECEIVER, CustomTagHander.TAG_CONTENT,
+                            .TAG_COMMENTATOR, CommentList.get(position).getUserName(), CustomTagHander
+                            .TAG_COMMENTATOR, CustomTagHander.TAG_RECEIVER, CommentList.get(position)
+                            .getReceiver(), CustomTagHander.TAG_RECEIVER, CustomTagHander.TAG_CONTENT,
                     CommentList.get(position).getContent(), CustomTagHander.TAG_CONTENT);
             Log.e("tag","hzh"+contentstr);
         }
         viewHolder.content.setText(Html.fromHtml(contentstr,null,customTagHander));
-                viewHolder.content.setClickable(true);
+        viewHolder.content.setClickable(true);
         viewHolder.content.setMovementMethod(LinkMovementMethod.getInstance());
         //viewHolder.content.setTag(CustomTagHander.KEY_COMMENTATOR, CommentList.get(position).getUserName());
         //viewHolder.content.setTag(CustomTagHander.KEY_RECEIVER,CommentList.get(position).getReceiver());
