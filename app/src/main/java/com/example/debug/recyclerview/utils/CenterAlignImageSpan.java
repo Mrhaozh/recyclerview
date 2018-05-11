@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

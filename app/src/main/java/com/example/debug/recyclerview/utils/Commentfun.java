@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,12 +9,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.debug.recyclerview.adapter.CommentListAdapter;
+import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.ListBean;
-import com.example.debug.recyclerview.view.ListViewForScrollView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Commentfun {
@@ -51,18 +48,15 @@ public class Commentfun {
                 if (listView != null) {
                     // int span = btnComment.getId() == R.id.pl ? listView.getLastVisiblePosition().getHeight(): btnComment.getHeight();
                     int span =btnComment.getHeight();
-                    Log.e("tag", "span" + span);
+                    //Log.e("tag", "span" + span);
                     listView.smoothScrollBy(coord[1] + span - inputViewCoordinatesOnScreen[1], 500);
                 }
             }
-
             @Override
             public void onDismiss() {
-
             }
         });
     }
-
     private static Dialog showInputComment(Context context, final CommentDialogListener listener) {
         final Dialog dialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar);
         dialog.setContentView(R.layout.view_input_comment);

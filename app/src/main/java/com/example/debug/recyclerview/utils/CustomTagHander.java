@@ -1,4 +1,4 @@
-package com.example.debug.recyclerview;
+package com.example.debug.recyclerview.utils;
 
 import android.content.Context;
 import android.text.Editable;
@@ -9,6 +9,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.TextAppearanceSpan;
 import android.view.View;
 
+import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.Comment;
 
 import org.xml.sax.XMLReader;
@@ -102,7 +103,7 @@ public class CustomTagHander implements Html.TagHandler{
             int mEnd =output.length();
             if(tag.toLowerCase().equals(TAG_COMMENTATOR)){
                 int mStart =mMaps.get(KEY_COMMENTATOR_START);
-                output.setSpan(new TextAppearanceSpan(mContext,R.style.Comment),mStart,mEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                output.setSpan(new TextAppearanceSpan(mContext, R.style.Comment),mStart,mEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 output.setSpan(mCommentatorSpan,mStart,mEnd,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }else if(tag.toLowerCase().equals(TAG_RECEIVER)){
                 int mStart =mMaps.get(KEY_RECEIVER_START);

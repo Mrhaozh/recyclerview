@@ -1,6 +1,5 @@
 package com.example.debug.recyclerview.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,7 +11,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ImageSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,15 +23,11 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.debug.recyclerview.CenterAlignImageSpan;
-import com.example.debug.recyclerview.Commentfun;
-import com.example.debug.recyclerview.MainActivity;
+import com.example.debug.recyclerview.utils.CenterAlignImageSpan;
 import com.example.debug.recyclerview.R;
-import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.ListBean;
 import com.example.debug.recyclerview.bean.MessageEvent;
 import com.example.debug.recyclerview.view.ListViewForScrollView;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
@@ -173,6 +167,7 @@ public class ListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                EventBus.getDefault().post(new MessageEvent("zan",parent,height,position));
                 Toast.makeText(context,"aaa", Toast.LENGTH_SHORT).show();
             }
         });

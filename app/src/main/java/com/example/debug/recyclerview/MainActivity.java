@@ -12,8 +12,8 @@ import com.example.debug.recyclerview.adapter.ListAdapter;
 import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.ListBean;
 import com.example.debug.recyclerview.bean.MessageEvent;
+import com.example.debug.recyclerview.utils.Commentfun;
 import com.example.debug.recyclerview.view.PullToRefreshLayout;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -57,12 +57,19 @@ public class MainActivity extends AppCompatActivity {
                     "/ca1349540923dd54e54f7aedd609b3de9c824873.jpg"};
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onmessageEvent(MessageEvent event){
-        Commentfun.inputComment(this,event.listView,event.v,listData,event.position,new Commentfun.InputCommentListener(){
-            @Override
-            public void onCommitComment() {
-                listAdapter.notifyDataSetChanged();
-            }
-        });
+        if(event.msg=="zan") {
+            listData.get(event.position).setsb().append("赞"+",");
+            listAdapter.notifyDataSetChanged();
+        }else {
+            Commentfun.inputComment(this, event.listView, event.v, listData, event.position, new Commentfun.InputCommentListener() {
+
+
+                @Override
+                public void onCommitComment() {
+                    listAdapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
     @Override
     protected void onStart() {
@@ -130,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
         }
         listBean2.setnickName("nickName2");
         listData.add(listBean2);
-
         ListBean listBean3 = new ListBean();
         for (int i = 0; i < 3; i++) {
             listBean3.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));

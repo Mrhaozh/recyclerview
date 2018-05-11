@@ -1,7 +1,6 @@
 package com.example.debug.recyclerview.adapter;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -13,8 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.debug.recyclerview.Commentfun;
-import com.example.debug.recyclerview.CustomTagHander;
+import com.example.debug.recyclerview.utils.CustomTagHander;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.Comment;
 import com.example.debug.recyclerview.bean.MessageEvent;
@@ -93,7 +91,7 @@ public class CommentListAdapter extends BaseAdapter {
                             .TAG_COMMENTATOR, CustomTagHander.TAG_RECEIVER, CommentList.get(position)
                             .getReceiver(), CustomTagHander.TAG_RECEIVER, CustomTagHander.TAG_CONTENT,
                     CommentList.get(position).getContent(), CustomTagHander.TAG_CONTENT);
-            Log.e("tag","hzh"+contentstr);
+            //Log.e("tag","hzh"+contentstr);
         }
         viewHolder.content.setText(Html.fromHtml(contentstr,null,customTagHander));
         viewHolder.content.setClickable(true);

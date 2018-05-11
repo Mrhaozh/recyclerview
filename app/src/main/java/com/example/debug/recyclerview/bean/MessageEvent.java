@@ -14,7 +14,10 @@ public class MessageEvent {
             this.v=v;
             this.position=position;
         }
-        public String getMsg(){
-            return msg;
+        public MessageEvent(String msg,ListView listView,View v,int position){
+            this.listView=listView;
+            this.v=v;
+            this.position=position;
+            this.msg=msg;
         }
 }
