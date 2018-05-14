@@ -46,7 +46,6 @@ public class CustomTagHander implements Html.TagHandler{
                 super.updateDrawState(ds);
                 ds.setColor(0xFF436B9C);
                 ds.setUnderlineText(false);
-
             }
         };
         mReceiverSpan=new BaseClickableSpan() {

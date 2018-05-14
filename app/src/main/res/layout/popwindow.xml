@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/popwindowlikeimg"
             android:layout_width="15dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
@@ -19,6 +20,7 @@
             android:src="@drawable/like" />
 
         <TextView
+            android:id="@+id/popwindowlike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

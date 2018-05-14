@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         layout.stopRefresh();
                         Toast.makeText(MainActivity.this,"刷新完成",Toast.LENGTH_SHORT).show();
-
                     }
                 },1000);
             }
@@ -121,58 +120,68 @@ public class MainActivity extends AppCompatActivity {
     public void setData() {
         ListBean listBean0 = new ListBean();
         listBean0.setnickName("nickName0");
-        listBean0.setsb().append(",");
+        listBean0.setlikeState(false);
+       // listBean0.setsb().append(",");
         listData.add(listBean0);
         ListBean listBean1 = new ListBean();
         listBean1.getList().add(mUrls[0]);
         listBean1.setnickName("nickName1");
+        listBean1.setlikeState(false);
         listBean1.getCommentList().add(new Comment("user1",2,"comment1",""));
-        listBean1.setsb().append(",");
+        //listBean1.setsb().append(",") ;
         listData.add(listBean1);
         ListBean listBean2 = new ListBean();
+        listBean2.setlikeState(true);
         for (int i = 0; i < 2; i++) {
             listBean2.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
             listBean2.getList().add(mUrls[i]);
-            listBean2.setsb().append("好友" + i + ",");
+           // listBean2.setsb().append("好友" + i + ",");
+            listBean2.getlikelist().add("好友"+i);
         }
         listBean2.setnickName("nickName2");
         listData.add(listBean2);
         ListBean listBean3 = new ListBean();
+        listBean3.setlikeState(true);
         for (int i = 0; i < 3; i++) {
             listBean3.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
             listBean3.getList().add(mUrls[i]);
-            listBean3.setsb().append("好友" + i + ",");
+            //listBean3.setsb().append("好友" + i + ",");
+            listBean3.getlikelist().add("好友"+i);
         }
         listBean3.setnickName("nickName3");
         listData.add(listBean3);
 
         ListBean listBean4 = new ListBean();
-        StringBuilder sb4 = new StringBuilder();
+        listBean4.setlikeState(true);
+        //StringBuilder sb4 = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             listBean4.getCommentList().add(new Comment("user"+i,2+i,"commentas"+i,"he"));
             listBean4.getList().add(mUrls[i]);
-            listBean4.setsb().append("好友" + i + ",");
+            listBean4.getlikelist().add("好友"+i);
+            //listBean4.setsb().append("好友" + i + ",");
         }
         listBean4.setnickName("nickName4");
         listData.add(listBean4);
-
         ListBean listBean5 = new ListBean();
+        listBean5.setlikeState(false);
         for (int i = 0; i < 5; i++) {
             listBean5.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
             listBean5.getList().add(mUrls[i]);
-            listBean5.setsb().append("好友" + i + ",");
+            listBean5.getlikelist().add("好友"+i);
+            //listBean5.setsb().append("好友" + i + ",");
         }
         listBean5.setnickName("nickName5");
         listData.add(listBean5);
 
         ListBean listBean6 = new ListBean();
+        listBean6.setlikeState(true);
         for (int i = 0; i < 6; i++) {
             listBean6.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
             listBean6.getList().add(mUrls[i]);
-            listBean6.setsb().append("好友" + i + ",");
+            listBean6.getlikelist().add("好友"+i);
+            //listBean6.setsb().append("好友" + i + ",");
         }
         listBean6.setnickName("nickName6");
         listData.add(listBean6);
     }
-
 }

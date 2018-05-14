@@ -11,6 +11,8 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.debug.recyclerview.utils.AnimationTools;
 import com.example.debug.recyclerview.utils.CenterAlignImageSpan;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.ListBean;
@@ -102,11 +105,11 @@ public class ListAdapter extends BaseAdapter{
             viewHolder.recyclerView.setLayoutParams(params);
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,3,OrientationHelper.VERTICAL,false));
         }
-        if(listData.get(position).getsb().length()>1){
+        if(listData.get(position).getlikelist().size()>0){
             viewHolder.triicon.setVisibility(View.VISIBLE);
             viewHolder.likeLayout.setVisibility(View.VISIBLE);
             viewHolder.likeTxv.setMovementMethod(LinkMovementMethod.getInstance());
-            viewHolder.likeTxv.setText(addClickPart(listData.get(position).getsb()),TextView.BufferType.SPANNABLE);
+            viewHolder.likeTxv.setText(addClickPart(listData.get(position).getlikelist()),TextView.BufferType.SPANNABLE);
         }else{
             viewHolder.triicon.setVisibility(View.GONE);
             viewHolder.likeLayout.setVisibility(View.GONE);
@@ -123,37 +126,55 @@ public class ListAdapter extends BaseAdapter{
          viewHolder.commentlistview.setAdapter(commentListAdapter);
         return convertView;
     }
-    private SpannableStringBuilder addClickPart(String str){
+    private SpannableStringBuilder addClickPart(final List<String> list){
         CenterAlignImageSpan imgspan =new CenterAlignImageSpan(context,R.drawable.heart);
-        SpannableString spanStr=new SpannableString("p.");
+        SpannableString spanStr=new SpannableString("p");
         spanStr.setSpan(imgspan,0,1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         SpannableStringBuilder ssb =new SpannableStringBuilder(spanStr);
-        ssb.append(str);
-        String[] likeUsers =str.split(",");
-        if(likeUsers.length>0){
-            for(int i=0;i<likeUsers.length;i++){
-                final String name=likeUsers[i];
-                final int start =str.indexOf(name)+spanStr.length();
-                ssb.setSpan(new ClickableSpan(){
-                    @Override
-                    public void onClick(View widget) {
-                        Toast.makeText(context,name,Toast.LENGTH_SHORT).show();
+        String likeUsers=listToString(list);
+       // ssb.append(likeUsers);
+          //String[] likeUsers = str.split(",");
+            if (list.size() > 0) {
+                for (int i = 0; i < list.size();i++) {
+                    final String name;
+                    if(i==list.size()-1){
+                        name = list.get(i).toString();
+                    }else {
+                        name = list.get(i).toString() + ",";
                     }
-                    @Override
-                    public void updateDrawState(TextPaint ds) {
-                        super.updateDrawState(ds);
-                        ds.setColor(Color.BLUE);
-                        ds.setUnderlineText(false);
-                    }
-                },start,start+name.length(),0);
+                    SpannableString spannableString=new SpannableString(name);
+                    final int start = list.indexOf(name) + spanStr.length();
+                    spannableString.setSpan(new ClickableSpan() {
+                        @Override
+                        public void onClick(View widget) {
+                            Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void updateDrawState(TextPaint ds) {
+                            super.updateDrawState(ds);
+                            ds.setColor(Color.BLUE);
+                            ds.setUnderlineText(false);
+                        }
+                    }, 0, name.length(), 0);
+                    ssb.append(spannableString);
+                }
+
             }
-        }
+
         return ssb;
     }
     private void showpopwindow(View v, final ListView parent,final int position, LinearLayout heightTag){
         //final ImageView plbutton=v.findViewById(R.id.pl);
         final LinearLayout height=heightTag;
-        View view =LayoutInflater.from(context).inflate(R.layout.popwindow,null,false);
+        View view =LayoutInflater.from(context).inflate(R.layout.popwindow,parent,false);
+        TextView textView=view.findViewById(R.id.popwindowlike);
+        final ImageView imageView = view.findViewById(R.id.popwindowlikeimg);
+        if(listData.get(position).getlikeState()){
+            textView.setText("取消");
+        }else{
+            textView.setText("赞");
+        }
         view.measure(0,0);
         final PopupWindow popupWindow=new PopupWindow(view,view.getMeasuredWidth(),100,true);
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
@@ -166,9 +187,21 @@ public class ListAdapter extends BaseAdapter{
         zan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //AnimationTools.scale(imageView);
+                if(listData.get(position).getlikeState()) {
+                    listData.get(position).getlikelist().remove(listData.get(position).getlikelist().size()-1);
+                }else{
+                    listData.get(position).getlikelist().add("赞");
+                    //TextView txv=height.findViewById(R.id.likeTxv);
+                    //txv.setMovementMethod(LinkMovementMethod.getInstance());
+                    //txv.setText("");
+                    //Log.e("hzh",""+txv.getText());
+                }
+                listData.get(position).setlikeState(!listData.get(position).getlikeState());
+                notifyDataSetChanged();
                 popupWindow.dismiss();
-                EventBus.getDefault().post(new MessageEvent("zan",parent,height,position));
-                Toast.makeText(context,"aaa", Toast.LENGTH_SHORT).show();
+                //EventBus.getDefault().post(new MessageEvent("zan",parent,height,position));
+               // Toast.makeText(context,"aaa", Toast.LENGTH_SHORT).show();
             }
         });
         pinglun.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +216,23 @@ public class ListAdapter extends BaseAdapter{
     public static int dp2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+    private String listToString(List<String> list){
+        if(list==null){
+            return null;
+        }
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        //第一个前面不拼接","
+        for(String string :list) {
+            if(first) {
+                first=false;
+            }else{
+                result.append(",");
+            }
+            result.append(string);
+        }
+        return result.toString();
     }
     private class ViewHolder{
         TextView txv;
