@@ -1,7 +1,9 @@
 package com.example.debug.recyclerview.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,25 +28,35 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.debug.recyclerview.ImageUrlConfig;
+import com.example.debug.recyclerview.UserViewInfo;
 import com.example.debug.recyclerview.utils.AnimationTools;
 import com.example.debug.recyclerview.utils.CenterAlignImageSpan;
 import com.example.debug.recyclerview.R;
 import com.example.debug.recyclerview.bean.ListBean;
 import com.example.debug.recyclerview.bean.MessageEvent;
 import com.example.debug.recyclerview.view.ListViewForScrollView;
+import com.previewlibrary.GPreviewBuilder;
+
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter{
     private Context context;
-    private List<ListBean> listData;
+    private Activity activity;
+    private ArrayList<ListBean> listData;
+    //private GridLayoutManager mGridLayoutManager;
+    //private ArrayList<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
     //private  Commentfun commentfun=new Commentfun();
     // private ListView listView;
     // private LinearLayout heightTag;
-    public ListAdapter(Context context, List<ListBean> listData){
-        this.context=context;
+    public ListAdapter(Context context, ArrayList<ListBean> listData,Activity activity){
+        this.context=context.getApplicationContext();
         this.listData=listData;
+        this.activity=activity;
     }
     @Override
     public int getCount() {
@@ -81,8 +94,56 @@ public class ListAdapter extends BaseAdapter{
         }
 
         viewHolder.txv.setText(listData.get(position).getnickName());
-        RecyclerAdapter recyclerAdapter=new RecyclerAdapter(context,listData.get(position).getList());
-        viewHolder.recyclerView.setAdapter(recyclerAdapter);
+       // RecyclerAdapter recyclerAdapter=new RecyclerAdapter(context,(ArrayList<String>)listData.get(position).getList());
+       // viewHolder.recyclerView.setAdapter(recyclerAdapter);
+        /*List<String> urls = ImageUrlConfig.getUrls();
+        for (int i = 0; i < 5; i++) {
+            mThumbViewInfoList.add(new UserViewInfo(urls.get(i)));
+        }*/
+        final GridLayoutManager mGridLayoutManager;
+        if(listData.get(position).getList().size()==1){
+            ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
+//            params.width=160;
+            int getwidth=dp2px(context,270);
+            params.width=getwidth;
+            viewHolder.recyclerView.setLayoutParams(params);
+            mGridLayoutManager = new GridLayoutManager(context,1);
+            viewHolder.recyclerView.setLayoutManager(mGridLayoutManager);
+        }else if(listData.get(position).getList().size()==4){
+            ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
+//            params.width=160;
+            int getwidth=dp2px(context,180);
+            params.width=getwidth;
+            viewHolder.recyclerView.setLayoutParams(params);
+            mGridLayoutManager = new GridLayoutManager(context,2);
+            viewHolder.recyclerView.setLayoutManager(mGridLayoutManager);
+        }else{
+            ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
+//            params.width=160;
+            int getwidth=dp2px(context,270);
+            params.width=getwidth;
+            viewHolder.recyclerView.setLayoutParams(params);
+            mGridLayoutManager = new GridLayoutManager(context,3);
+            viewHolder.recyclerView.setLayoutManager(mGridLayoutManager);
+        }
+        viewHolder.recyclerView.setHasFixedSize(true);
+        MyBaseQuickAdapter adapter=new MyBaseQuickAdapter(context,listData.get(position).getList().size());
+        //mThumbViewInfoList=listData.get(position).getList();
+        adapter.addData(listData.get(position).getList());
+        viewHolder.recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int itemposition) {
+                computeBoundsBackward(mGridLayoutManager.findFirstVisibleItemPosition(),position,mGridLayoutManager);
+                GPreviewBuilder.from(activity)
+                        .setData(listData.get(position).getList())
+                        .setCurrentIndex(itemposition)
+                        .setSingleFling(true)
+                        .setType(GPreviewBuilder.IndicatorType.Number)
+                        .start();
+            }
+        });
+        /*
         if(listData.get(position).getList().size()==4){
             ViewGroup.LayoutParams params=viewHolder.recyclerView.getLayoutParams();
 //            params.width=160;
@@ -104,7 +165,7 @@ public class ListAdapter extends BaseAdapter{
             params.width=getwidth;
             viewHolder.recyclerView.setLayoutParams(params);
             viewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,3,OrientationHelper.VERTICAL,false));
-        }
+        }*/
         if(listData.get(position).getlikelist().size()>0){
             viewHolder.triicon.setVisibility(View.VISIBLE);
             viewHolder.likeLayout.setVisibility(View.VISIBLE);
@@ -131,7 +192,7 @@ public class ListAdapter extends BaseAdapter{
         SpannableString spanStr=new SpannableString("p");
         spanStr.setSpan(imgspan,0,1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         SpannableStringBuilder ssb =new SpannableStringBuilder(spanStr);
-        String likeUsers=listToString(list);
+        //String likeUsers=listToString(list);
        // ssb.append(likeUsers);
           //String[] likeUsers = str.split(",");
             if (list.size() > 0) {
@@ -187,15 +248,11 @@ public class ListAdapter extends BaseAdapter{
         zan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //AnimationTools.scale(imageView);
+                AnimationTools.scale(imageView);
                 if(listData.get(position).getlikeState()) {
                     listData.get(position).getlikelist().remove(listData.get(position).getlikelist().size()-1);
                 }else{
                     listData.get(position).getlikelist().add("赞");
-                    //TextView txv=height.findViewById(R.id.likeTxv);
-                    //txv.setMovementMethod(LinkMovementMethod.getInstance());
-                    //txv.setText("");
-                    //Log.e("hzh",""+txv.getText());
                 }
                 listData.get(position).setlikeState(!listData.get(position).getlikeState());
                 notifyDataSetChanged();
@@ -208,7 +265,6 @@ public class ListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                //Commentfun commentfun=new Commentfun();
                 EventBus.getDefault().post(new MessageEvent(parent,height,position));
             }
         });
@@ -243,5 +299,16 @@ public class ListAdapter extends BaseAdapter{
         RecyclerView recyclerView;
         ListViewForScrollView commentlistview;
         LinearLayout heightTag;
+    }
+    private void computeBoundsBackward(int firstCompletelyVisiblePos,int position,GridLayoutManager mGridLayoutManager) {
+        for (int i = firstCompletelyVisiblePos;i < listData.get(position).getList().size(); i++) {
+            View itemView = mGridLayoutManager.findViewByPosition(i);
+            Rect bounds = new Rect();
+            if (itemView != null) {
+                ImageView thumbView = (ImageView) itemView.findViewById(R.id.images);
+                thumbView.getGlobalVisibleRect(bounds);
+            }
+            listData.get(position).getList().get(i).setBounds(bounds);
+        }
     }
 }

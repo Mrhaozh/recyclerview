@@ -14,6 +14,8 @@ import com.example.debug.recyclerview.bean.ListBean;
 import com.example.debug.recyclerview.bean.MessageEvent;
 import com.example.debug.recyclerview.utils.Commentfun;
 import com.example.debug.recyclerview.view.PullToRefreshLayout;
+import com.previewlibrary.ZoomMediaLoader;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -87,12 +89,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ZoomMediaLoader.getInstance().init(new TestImageLoader());
         setData();
+
         listView = findViewById(R.id.list_view);
         layout=(PullToRefreshLayout) findViewById(R.id.refresh_layout);
         //ScrollView scrollView=findViewById(R.id.scrollview);
         //scrollView.smoothScrollTo(0,50);
-        listAdapter = new ListAdapter(MainActivity.this, listData);
+        listAdapter = new ListAdapter(MainActivity.this,(ArrayList<ListBean>) listData,MainActivity.this);
         listView.setAdapter(listAdapter);
         View head= LayoutInflater.from(this).inflate(R.layout.head_view_layout,null);
         listView.addHeaderView(head,null,true);
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
        // listBean0.setsb().append(",");
         listData.add(listBean0);
         ListBean listBean1 = new ListBean();
-        listBean1.getList().add(mUrls[0]);
+        listBean1.getList().add(new UserViewInfo(mUrls[0]));
         listBean1.setnickName("nickName1");
         listBean1.setlikeState(false);
         listBean1.getCommentList().add(new Comment("user1",2,"comment1",""));
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         listBean2.setlikeState(true);
         for (int i = 0; i < 2; i++) {
             listBean2.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
-            listBean2.getList().add(mUrls[i]);
+            listBean2.getList().add(new UserViewInfo(mUrls[i]));
            // listBean2.setsb().append("好友" + i + ",");
             listBean2.getlikelist().add("好友"+i);
         }
@@ -144,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         listBean3.setlikeState(true);
         for (int i = 0; i < 3; i++) {
             listBean3.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
-            listBean3.getList().add(mUrls[i]);
+            listBean3.getList().add(new UserViewInfo(mUrls[i]));
             //listBean3.setsb().append("好友" + i + ",");
             listBean3.getlikelist().add("好友"+i);
         }
@@ -156,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         //StringBuilder sb4 = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             listBean4.getCommentList().add(new Comment("user"+i,2+i,"commentas"+i,"he"));
-            listBean4.getList().add(mUrls[i]);
+            listBean4.getList().add(new UserViewInfo(mUrls[i]));
             listBean4.getlikelist().add("好友"+i);
             //listBean4.setsb().append("好友" + i + ",");
         }
@@ -166,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         listBean5.setlikeState(false);
         for (int i = 0; i < 5; i++) {
             listBean5.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
-            listBean5.getList().add(mUrls[i]);
+            listBean5.getList().add(new UserViewInfo(mUrls[i]));
             listBean5.getlikelist().add("好友"+i);
             //listBean5.setsb().append("好友" + i + ",");
         }
@@ -177,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         listBean6.setlikeState(true);
         for (int i = 0; i < 6; i++) {
             listBean6.getCommentList().add(new Comment("user"+i,2+i,"comment"+i,"he"));
-            listBean6.getList().add(mUrls[i]);
+            listBean6.getList().add(new UserViewInfo(mUrls[i]));
             listBean6.getlikelist().add("好友"+i);
             //listBean6.setsb().append("好友" + i + ",");
         }

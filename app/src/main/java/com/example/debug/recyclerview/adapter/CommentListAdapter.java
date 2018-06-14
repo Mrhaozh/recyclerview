@@ -28,7 +28,7 @@ public class CommentListAdapter extends BaseAdapter {
     private ListView listView;
     private int getposition;
     public CommentListAdapter(Context context, List<Comment> CommentList,ListView listView,int getposition) {
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.CommentList = CommentList;
         this.listView=listView;
         this.getposition=getposition;

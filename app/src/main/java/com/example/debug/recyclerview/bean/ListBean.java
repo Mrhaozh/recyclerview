@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 import com.example.debug.recyclerview.MainActivity;
 import com.example.debug.recyclerview.R;
+import com.example.debug.recyclerview.UserViewInfo;
 import com.example.debug.recyclerview.utils.CenterAlignImageSpan;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class ListBean {
     public ListBean() {
     }
     private List<String> likelist=new ArrayList<String>();
-    private List<String> urlList = new ArrayList<>();
+    private ArrayList<UserViewInfo> urlList = new ArrayList<>();
     private StringBuilder sb =new StringBuilder();
     private String nickName;
     private List<Comment> CommentList =new ArrayList<Comment>();
@@ -32,7 +34,7 @@ public class ListBean {
    /* public void setList(List<String> urlList) {
         this.urlList = urlList;
     }*/
-    public List<String> getList() {
+    public ArrayList<UserViewInfo> getList() {
         return urlList;
     }
     public StringBuilder setsb(){
